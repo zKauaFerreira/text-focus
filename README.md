@@ -17,7 +17,7 @@ Text Focus é uma ferramenta de leitura dinâmica que exibe palavras individualm
 ### 🎙️ Áudio & Som
 - [ ] Texto para voz com controle de velocidade
 - [ ] Efeitos sonoros configuráveis (ligado/desligado)
-- [ ] 🎵 Player de música lofi minimalista
+- [ ] Player de música LOFI radio minimalista
   - [ ] Controle de visibilidade do player
   - [ ] Ajuste de volume
   - [ ] Controles de reprodução
