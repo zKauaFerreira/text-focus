@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitura Concentrada</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div id="text-input-container" class="active">
+            <textarea id="texto" placeholder="Cole seu texto aqui..." autofocus></textarea>
+            <button id="start-reading">Começar Leitura</button>
+        </div>
+        
+        <div id="reading-container" class="hidden">
+            <div class="word-display">
+                <div class="previous-word" id="previous-word"></div>
+                <div class="current-word" id="current-word"></div>
+                <div class="next-word" id="next-word"></div>
+            </div>
+            <div class="controls">
+                <button id="back-btn">←</button>
+                <button id="forward-btn">→</button>
+                <button id="reset-btn">↻</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
