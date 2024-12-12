@@ -80,33 +80,19 @@ Text Focus é uma ferramenta de leitura dinâmica que exibe palavras individualm
 ## 🛠️ Tecnologias Utilizadas
 
 <table>
-
 <tr>
-
 <td align="center">
-
 <img src="https://skillicons.dev/icons?i=html" width="50" alt="HTML Icon"><br>
-
 <strong>HTML</strong>
-
 </td>
-
 <td align="center">
-
 <img src="https://skillicons.dev/icons?i=css" width="50" alt="CSS Icon"><br>
-
 <strong>CSS</strong>
-
 </td>
-
 <td align="center">
-
 <img src="https://skillicons.dev/icons?i=js" width="50" alt="JavaScript Icon"><br>
-
 <strong>JavaScript</strong>
-
 </td>
-
 <table>
 
 
