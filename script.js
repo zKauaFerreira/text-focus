@@ -1,3 +1,17 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('modal');
+    const configIcon = document.querySelector('.config-icon');
+
+    configIcon.addEventListener('click', () => {
+        modal.classList.toggle('hidden');
+    });
+
+    const themeSelect = document.getElementById('theme-select');
+    themeSelect.addEventListener('change', () => {
+        const selectedTheme = themeSelect.value;
+        document.body.className = selectedTheme;
+    });
+});
 class WordReader {
     constructor() {
         this.textInput = document.getElementById('texto');
@@ -82,10 +96,10 @@ class WordReader {
         return text
             .replace(/"/g, (match, offset, string) => {
                 if (offset === 0 || string[offset - 1] === ' ') {
-                    return ' abre aspas';
+                    return ' abreAspas';
                 }
                 if (offset === string.length - 1 || string[offset + 1] === ' ') {
-                    return ' fecha aspas';
+                    return ' fechaAspas';
                 }
                 return ' aspas'; // Fallback para casos complexos
             })
@@ -93,27 +107,27 @@ class WordReader {
             .replace(/,/g, ' vírgula')
             .replace(/!/g, ' exclamação')
             .replace(/\?/g, ' interrogação')
-            .replace(/:/g, ' dois pontos')
-            .replace(/;/g, ' ponto e vírgula')
-            .replace(/\(/g, ' abre parênteses')
-            .replace(/\)/g, ' fecha parênteses')
-            .replace(/\[/g, ' abre colchetes')
-            .replace(/\]/g, ' fecha colchetes')
-            .replace(/\{/g, ' abre chaves')
-            .replace(/\}/g, ' fecha chaves')
+            .replace(/:/g, ' doisPontos')
+            .replace(/;/g, ' pontOEVírgula')
+            .replace(/\(/g, ' abreParênteses')
+            .replace(/\)/g, ' fechaParênteses')
+            .replace(/\[/g, ' abreColchetes')
+            .replace(/\]/g, ' fechaColchetes')
+            .replace(/\{/g, ' abreChaves')
+            .replace(/\}/g, ' fechaChaves')
             .replace(/-/g, ' traço')
             .replace(/_/g, ' underline')
             .replace(/\//g, ' barra')
-            .replace(/\\/g, ' barra invertida')
+            .replace(/\\/g, ' barraInvertida')
             .replace(/\*/g, ' asterisco')
-            .replace(/\&/g, ' e comercial')
-            .replace(/#/g, ' cerquilha')
+            .replace(/\&/g, ' Ecomercial')
+            .replace(/#/g, ' réchitég')
             .replace(/@/g, ' arroba')
             .replace(/\$/g, ' cifrão')
             .replace(/%/g, ' porcentagem')
             .replace(/\^/g, ' circunflexo')
             .replace(/~/g, ' til')
-            .replace(/`/g, ' acento grave');
+            .replace(/`/g, ' acentoGrave');
     }
     
     speakWithPause(segments, delay) {
