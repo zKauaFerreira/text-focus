@@ -73,9 +73,9 @@ Text Focus é uma ferramenta de leitura dinâmica que exibe palavras individualm
 1. Cole ou digite seu texto na área de entrada
 2. Clique em "Começar Leitura"
 3. Use as setas do teclado ou botões na tela para navegar:
-   - ← Palavra anterior
-   - → ou Espaço para próxima palavra
-   - ESC para reiniciar
+   - Palavra anterior (←)
+   - Espaço para próxima palavra (→)
+   - ESC para reiniciar (::)
 
 ## 🛠️ Tecnologias Utilizadas
 
