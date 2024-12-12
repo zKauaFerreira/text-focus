@@ -107,25 +107,7 @@ Text Focus é uma ferramenta de leitura dinâmica que exibe palavras individualm
 
 </td>
 
-<td align="center">
 
-<img src="https://skillicons.dev/icons?i=nodejs" width="50" alt="Node.js Icon"><br>
-
-<strong>Node.js</strong>
-
-</td>
-
-<td align="center">
-
-<img src="https://skillicons.dev/icons?i=linux" width="50" alt="Linux Icon"><br>
-
-<strong>Linux</strong>
-
-</td>
-
-</tr>
-
-</table>
 
 ## 📱 Compatibilidade
 
