@@ -107,6 +107,8 @@ Text Focus é uma ferramenta de leitura dinâmica que exibe palavras individualm
 
 </td>
 
+<table>
+
 
 
 ## 📱 Compatibilidade
