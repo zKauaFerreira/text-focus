@@ -6,47 +6,11 @@ Um aplicativo web moderno para leitura focada e produtiva, projetado para melhor
 
 Text Focus é uma ferramenta de leitura dinâmica que exibe palavras individualmente em tamanho grande na tela, permitindo que o usuário mantenha o foco e aumente sua velocidade de leitura. O aplicativo oferece uma experiência personalizada com várias funcionalidades para melhorar a experiência de leitura.
 
-## ✨ Funcionalidades Futuras
+## ✨ Funcionalidades Atuais
 
-### 📝 Exibição de Texto
-- [x] Palavras por linha configuráveis (1-5)
-- [x] Visualização personalizada
-  - [x] Exibição de palavras anteriores (1-3)
-  - [x] Exibição de palavras seguintes (1-3)
-- [x] Transições suaves de texto
-  - [x] Opção de ativar/desativar animações
-
-### ⌨️ Controles & Interface
-- [x] Teclas de atalho personalizáveis
-  - [x] Mapeamento de teclas primárias/secundárias
-  - [x] Exibição de atalhos ao segurar TAB
-- [x] Botões ocultáveis
-- [x] ⚙️ Menu de configurações (canto superior esquerdo)
-
-### 🎨 Temas
-- [x] Sistema de troca de temas
-  - [x] Dracula
-  - [x] Nord
-  - [x] Escuro
-  - [x] Dark
-  - [x] Claro
-- [x] Transições suaves entre temas
-
-### 🚀 Otimização
-- [x] Otimização de código
-  - [x] Melhorias de performance
-  - [x] Gerenciamento de memória
-  - [x] Otimização de carregamento
-- [x] Design responsivo
-  - [x] Compatibilidade com dispositivos móveis
-  - [x] Otimização para desktop
-- [x] Testes em diferentes navegadores
-
-### 💅 Melhorias Visuais
-- [x] Elementos modernos de interface
-- [x] Micro-interações
-- [x] Estilização consistente entre temas
-- [x] Melhorias de acessibilidade
+- [X] Leitura de texto com exibição de palavras individualmente
+- [X] Controles de navegação (setas do teclado ou botões na tela)
+- [X] Reinício da leitura com o botão ESC
 
 ## ✨ Funcionalidades Futuras
 
@@ -63,6 +27,46 @@ Text Focus é uma ferramenta de leitura dinâmica que exibe palavras individualm
   - [ ] Configuração da API
   - [ ] Processamento de respostas
   - [ ] Tratamento de erros
+
+### 📝 Exibição de Texto
+- [ ] Palavras por linha configuráveis (1-5)
+- [ ] Visualização personalizada
+  - [ ] Exibição de palavras anteriores (1-3)
+  - [ ] Exibição de palavras seguintes (1-3)
+- [ ] Transições suaves de texto
+  - [ ] Opção de ativar/desativar animações
+
+### ⌨️ Controles & Interface
+- [ ] Teclas de atalho personalizáveis
+  - [ ] Mapeamento de teclas primárias/secundárias
+  - [ ] Exibição de atalhos ao segurar TAB
+- [ ] Botões ocultáveis
+- [ ] ⚙️ Menu de configurações (canto superior esquerdo)
+
+### 🎨 Temas
+- [ ] Sistema de troca de temas
+  - [ ] Dracula
+  - [ ] Nord
+  - [ ] Escuro
+  - [ ] Dark
+  - [ ] Claro
+- [ ] Transições suaves entre temas
+
+### 🚀 Otimização
+- [ ] Otimização de código
+  - [ ] Melhorias de performance
+  - [ ] Gerenciamento de memória
+  - [ ] Otimização de carregamento
+- [ ] Design responsivo
+  - [ ] Compatibilidade com dispositivos móveis
+  - [ ] Otimização para desktop
+- [ ] Testes em diferentes navegadores
+
+### 💅 Melhorias Visuais
+- [ ] Elementos modernos de interface
+- [ ] Micro-interações
+- [ ] Estilização consistente entre temas
+- [ ] Melhorias de acessibilidade
 
 ## 🚀 Como Usar
 
