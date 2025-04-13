@@ -1020,11 +1020,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // URLs dos sons ambiente
     const ambientSoundUrls = {
-        rain: 'https://cdn.pixabay.com/download/audio/2022/03/10/audio_12129ad866.mp3?filename=rain-medium-6951.mp3',
-        fire: 'https://cdn.pixabay.com/download/audio/2021/11/29/audio_c2c54050ae.mp3?filename=crackling-fireplace-82894.mp3',
-        forest: 'https://cdn.pixabay.com/download/audio/2021/09/06/audio_868c97375f.mp3?filename=forest-birds-chirping-wind-and-trees-74280.mp3',
-        cafe: 'https://cdn.pixabay.com/download/audio/2022/11/17/audio_c67b63c9ae.mp3?filename=cafe-ambience-7054.mp3',
-        ocean: 'https://cdn.pixabay.com/download/audio/2021/08/09/audio_88747d9c5f.mp3?filename=calming-ocean-waves-nature-sound-8052.mp3'
+        rain: 'https://www.soundjay.com/nature/sounds/rain-01.mp3', // Alternativa para chuva
+        fire: 'https://www.soundjay.com/nature/sounds/campfire-1.mp3', // Alternativa para lareira
+        forest: 'https://www.soundjay.com/nature/sounds/windy-forest-ambience-01.mp3', // Alternativa para floresta
+        cafe: 'https://www.soundjay.com/appliances/sounds/coffee-maker-1.mp3', // Alternativa para café
+        ocean: 'https://www.soundjay.com/nature/sounds/ocean-wave-1.mp3', // Alternativa para oceano
+        bus: 'https://www.soundjay.com/transportation/sounds/bus-driving-interior-ambience-01.mp3' // Alternativa para oceano
     };
 
     /**

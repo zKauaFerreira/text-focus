@@ -213,21 +213,24 @@ input, textarea, select {
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
-}
-
-.logo h1 {
+  }
+  
+  .logo h1 {
     font-size: var(--font-size-xl);
-    font-weight: 600;
+    font-weight: 700; /* Deixando a fonte mais bold */
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-}
-
-.logo .iconify {
+    margin: 0; /* Removi margens padrão do h1 para melhor controle no flexbox */
+    font-family: 'Montserrat', sans-serif; /* Exemplo de fonte mais bonita para título */
+    /* Outras opções de fontes que você pode gostar: 'Poppins', 'Roboto Slab', 'Oswald' */
+  }
+  
+  .logo .iconify {
     font-size: 1.8rem;
     color: var(--primary-color);
-}
+  }
 
 .header-controls {
     display: flex;
@@ -761,7 +764,8 @@ input[type="range"]::-moz-range-thumb:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80px;
+    width: 12.8em;
+    margin-bottom: .5rem;
     height: 80px;
     border-radius: var(--border-radius-lg);
     background-color: var(--btn-bg);
@@ -944,8 +948,11 @@ input[type="range"]::-moz-range-thumb:hover {
     display: none;
     animation: fadeIn var(--transition-normal);
 }
+.ai-mode-content {
+    display: block;
+}
 
-.settings-tab-content.active, .stats-tab-content.active, .ai-mode-content.active {
+.settings-tab-content.active, .stats-tab-content.active {
     display: block;
 }
 
