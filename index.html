@@ -3,29 +3,583 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leitura Concentrada</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Text Focus - Leitura Dinâmica Aprimorada</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 </head>
 <body>
-    <div id="app">
-        <div id="text-input-container" class="active">
-            <textarea id="texto" placeholder="Cole seu texto aqui..." autofocus></textarea>
-            <button id="start-reading">Começar Leitura</button>
-        </div>
-        
-        <div id="reading-container" class="hidden">
-            <div class="word-display">
-                <div class="previous-word" id="previous-word"></div>
-                <div class="current-word" id="current-word"></div>
-                <div class="next-word" id="next-word"></div>
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="logo">
+                <span class="iconify" data-icon="clarity:speed-line"></span>
+                <h1>Text Focus</h1>
             </div>
-            <div class="controls">
-                <button id="back-btn">←</button>
-                <button id="forward-btn">→</button>
-                <button id="reset-btn">↻</button>
+            <div class="header-controls">
+                <button id="settingsBtn" class="btn-icon" title="Configurações">
+                    <span class="iconify" data-icon="carbon:settings"></span>
+                </button>
+                <button id="statsBtn" class="btn-icon" title="Estatísticas">
+                    <span class="iconify" data-icon="carbon:chart-line"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Text Input Section -->
+            <section class="text-input-section">
+                <div class="text-input-container">
+                    <textarea id="textInput" placeholder="Cole ou digite seu texto aqui para iniciar a leitura dinâmica..."></textarea>
+                    <div class="input-controls">
+                        <button id="startReadingBtn" class="btn primary">Iniciar Leitura</button>
+                        <button id="clearTextBtn" class="btn secondary">Limpar</button>
+                        <button id="iaGenBtn" class="btn accent">Gerar com IA</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reader Section -->
+            <section class="reader-section" id="readerSection">
+                <div class="reader-container">
+                    <div class="word-display">
+                        <div class="previous-words"></div>
+                        <div class="current-word"></div>
+                        <div class="next-words"></div>
+                    </div>
+                    <div class="reader-controls">
+                        <div class="main-controls">
+                            <button id="resetBtn" class="btn-icon" title="Reiniciar (ESC)">
+                                <span class="iconify" data-icon="carbon:reset"></span>
+                            </button>
+                            <button id="prevBtn" class="btn-icon" title="Palavra Anterior (←)">
+                                <span class="iconify" data-icon="carbon:arrow-left"></span>
+                            </button>
+                            <button id="playPauseBtn" class="btn-icon" title="Reproduzir/Pausar (Espaço)">
+                                <span class="iconify" data-icon="carbon:play"></span>
+                            </button>
+                            <button id="nextBtn" class="btn-icon" title="Próxima Palavra (→)">
+                                <span class="iconify" data-icon="carbon:arrow-right"></span>
+                            </button>
+                        </div>
+                        <div class="speed-control">
+                            <label>Velocidade: <span id="wpmValue">300</span> PPM</label>
+                            <input type="range" id="wpmSlider" min="50" max="800" step="10" value="300">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Audio Controls -->
+            <section class="audio-section">
+                <div class="audio-container">
+                    <div class="audio-tabs">
+                        <button class="tab-btn active" data-tab="tts">Texto para Voz</button>
+                        <button class="tab-btn" data-tab="lofi">LoFi Music</button>
+                        <button class="tab-btn" data-tab="ambient">Sons Ambiente</button>
+                    </div>
+
+                    <div class="tab-content active" id="tts-tab">
+                        <!-- TTS Content -->
+                        <div class="tts-controls">
+                            <div class="control-group">
+                                <button id="ttsPlayBtn" class="btn primary">
+                                    <span class="iconify" data-icon="carbon:play"></span> Reproduzir
+                                </button>
+                                <button id="ttsPauseBtn" class="btn secondary">
+                                    <span class="iconify" data-icon="carbon:pause"></span> Pausar
+                                </button>
+                                <button id="ttsStopBtn" class="btn secondary">
+                                    <span class="iconify" data-icon="carbon:stop"></span> Parar
+                                </button>
+                            </div>
+                            <div class="control-group">
+                                <label>Velocidade da Fala</label>
+                                <input type="range" id="ttsRateSlider" min="0.5" max="2" step="0.1" value="1">
+                                <span id="ttsRateValue">1.0x</span>
+                            </div>
+                            <div class="control-group">
+                                <label>Volume</label>
+                                <input type="range" id="ttsVolumeSlider" min="0" max="1" step="0.1" value="1">
+                                <span id="ttsVolumeValue">100%</span>
+                            </div>
+                            <div class="control-group">
+                                <label>Voz</label>
+                                <select id="ttsVoiceSelect"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="lofi-tab">
+                        <!-- LoFi Player Content -->
+                        <div class="lofi-controls">
+                            <div class="control-group">
+                                <button id="lofiPlayBtn" class="btn primary">
+                                    <span class="iconify" data-icon="carbon:play"></span> Reproduzir
+                                </button>
+                                <button id="lofiPauseBtn" class="btn secondary">
+                                    <span class="iconify" data-icon="carbon:pause"></span> Pausar
+                                </button>
+                                <button id="lofiStopBtn" class="btn secondary">
+                                    <span class="iconify" data-icon="carbon:stop"></span> Parar
+                                </button>
+                            </div>
+                            <div class="control-group">
+                                <label>Volume</label>
+                                <input type="range" id="lofiVolumeSlider" min="0" max="1" step="0.1" value="0.5">
+                                <span id="lofiVolumeValue">50%</span>
+                            </div>
+                            <div class="control-group">
+                                <label>Trilha LoFi</label>
+                                <select id="lofiTrackSelect">
+                                    <option value="https://stream.zeno.fm/0r0xa792kwzuv">LoFi Hip Hop Radio</option>
+                                    <option value="https://stream.zeno.fm/q2wx9qkgx4zuv">Chillhop Radio</option>
+                                    <option value="https://stream.zeno.fm/5cbtfvhvkzzuv">Study Beats</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="ambient-tab">
+                        <!-- Ambient Sounds Content -->
+                        <div class="ambient-controls">
+                            <div class="ambient-sounds">
+                                <div class="ambient-sound">
+                                    <button class="ambient-btn" data-sound="rain">
+                                        <span class="iconify" data-icon="carbon:rain"></span>
+                                        <span>Chuva</span>
+                                    </button>
+                                    <input type="range" class="ambient-volume" min="0" max="1" step="0.1" value="0.5">
+                                </div>
+                                <div class="ambient-sound">
+                                    <button class="ambient-btn" data-sound="fire">
+                                        <span class="iconify" data-icon="carbon:fire"></span>
+                                        <span>Lareira</span>
+                                    </button>
+                                    <input type="range" class="ambient-volume" min="0" max="1" step="0.1" value="0.5">
+                                </div>
+                                <div class="ambient-sound">
+                                    <button class="ambient-btn" data-sound="forest">
+                                        <span class="iconify" data-icon="carbon:tree"></span>
+                                        <span>Floresta</span>
+                                    </button>
+                                    <input type="range" class="ambient-volume" min="0" max="1" step="0.1" value="0.5">
+                                </div>
+                                <div class="ambient-sound">
+                                    <button class="ambient-btn" data-sound="cafe">
+                                        <span class="iconify" data-icon="carbon:cafe"></span>
+                                        <span>Café</span>
+                                    </button>
+                                    <input type="range" class="ambient-volume" min="0" max="1" step="0.1" value="0.5">
+                                </div>
+                                <div class="ambient-sound">
+                                    <button class="ambient-btn" data-sound="ocean">
+                                        <span class="iconify" data-icon="carbon:wave"></span>
+                                        <span>Oceano</span>
+                                    </button>
+                                    <input type="range" class="ambient-volume" min="0" max="1" step="0.1" value="0.5">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <button id="muteAllAmbientBtn" class="btn secondary">
+                                    <span class="iconify" data-icon="carbon:volume-mute"></span> Silenciar Todos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Modals -->
+        <div class="modal-overlay" id="settingsModal">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h2>Configurações</h2>
+                    <button class="modal-close-btn">
+                        <span class="iconify" data-icon="carbon:close"></span>
+                    </button>
+                </div>
+                <div class="modal-content">
+                    <div class="settings-tabs">
+                        <button class="settings-tab-btn active" data-tab="appearance">Aparência</button>
+                        <button class="settings-tab-btn" data-tab="reading">Leitura</button>
+                        <button class="settings-tab-btn" data-tab="audio">Áudio</button>
+                        <button class="settings-tab-btn" data-tab="ai">Inteligência Artificial</button>
+                        <button class="settings-tab-btn" data-tab="shortcuts">Atalhos</button>
+                    </div>
+
+                    <div class="settings-tab-content active" id="appearance-tab">
+                        <div class="settings-group">
+                            <h3>Tema</h3>
+                            <div class="theme-selector">
+                                <button class="theme-btn" data-theme="light">
+                                    <div class="theme-preview light-theme"></div>
+                                    <span>Claro</span>
+                                </button>
+                                <button class="theme-btn" data-theme="dark">
+                                    <div class="theme-preview dark-theme"></div>
+                                    <span>Escuro</span>
+                                </button>
+                                <button class="theme-btn" data-theme="nord">
+                                    <div class="theme-preview nord-theme"></div>
+                                    <span>Nord</span>
+                                </button>
+                                <button class="theme-btn" data-theme="dracula">
+                                    <div class="theme-preview dracula-theme"></div>
+                                    <span>Dracula</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="settings-group">
+                            <h3>Fonte</h3>
+                            <select id="fontSelect" class="settings-select">
+                                <option value="Inter">Inter</option>
+                                <option value="Roboto">Roboto</option>
+                                <option value="Open Sans">Open Sans</option>
+                                <option value="Montserrat">Montserrat</option>
+                                <option value="Poppins">Poppins</option>
+                            </select>
+                        </div>
+                        <div class="settings-group">
+                            <h3>Tamanho da Fonte</h3>
+                            <div class="range-control">
+                                <input type="range" id="fontSizeSlider" min="14" max="32" step="1" value="16">
+                                <span id="fontSizeValue">16px</span>
+                            </div>
+                        </div>
+                        <div class="settings-group">
+                            <h3>Animações</h3>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="enableAnimations" checked>
+                                <label for="enableAnimations">Habilitar animações</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-tab-content" id="reading-tab">
+                        <div class="settings-group">
+                            <h3>Palavras Visíveis</h3>
+                            <div class="range-control">
+                                <label>Palavras anteriores:</label>
+                                <input type="range" id="prevWordsSlider" min="0" max="3" step="1" value="1">
+                                <span id="prevWordsValue">1</span>
+                            </div>
+                            <div class="range-control">
+                                <label>Palavras seguintes:</label>
+                                <input type="range" id="nextWordsSlider" min="0" max="3" step="1" value="1">
+                                <span id="nextWordsValue">1</span>
+                            </div>
+                        </div>
+                        <div class="settings-group">
+                            <h3>Velocidade Padrão</h3>
+                            <div class="range-control">
+                                <input type="range" id="defaultWpmSlider" min="50" max="800" step="10" value="300">
+                                <span id="defaultWpmValue">300 PPM</span>
+                            </div>
+                        </div>
+                        <div class="settings-group">
+                            <h3>Destaque de Palavras</h3>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="highlightLongWords" checked>
+                                <label for="highlightLongWords">Destacar palavras longas</label>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="pauseOnPunctuation" checked>
+                                <label for="pauseOnPunctuation">Pausar em pontuação</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-tab-content" id="audio-tab">
+                        <div class="settings-group">
+                            <h3>Texto para Voz</h3>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="enableTTS" checked>
+                                <label for="enableTTS">Habilitar TTS</label>
+                            </div>
+                            <div class="range-control">
+                                <label>Velocidade padrão:</label>
+                                <input type="range" id="defaultTTSRateSlider" min="0.5" max="2" step="0.1" value="1">
+                                <span id="defaultTTSRateValue">1.0x</span>
+                            </div>
+                        </div>
+                        <div class="settings-group">
+                            <h3>LoFi e Sons Ambiente</h3>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="enableLofi" checked>
+                                <label for="enableLofi">Habilitar player LoFi</label>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="enableAmbientSounds" checked>
+                                <label for="enableAmbientSounds">Habilitar Sons Ambiente</label>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="rememberAudioSettings" checked>
+                                <label for="rememberAudioSettings">Lembrar configurações de áudio</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-tab-content" id="ai-tab">
+                        <div class="settings-group">
+                            <h3>API Settings</h3>
+                            <div class="form-group">
+                                <label for="apiKeyInput">Chave da API:</label>
+                                <input type="password" id="apiKeyInput" placeholder="Insira sua chave da API">
+                            </div>
+                            <div class="form-group">
+                                <label for="apiModelSelect">Modelo:</label>
+                                <select id="apiModelSelect">
+                                    <option value="llama3-70b-8192">LLaMA 3 70B</option>
+                                    <option value="llama3-8b-8192">LLaMA 3 8B</option>
+                                    <option value="mixtral-8x7b-32768">Mixtral 8x7B</option>
+                                </select>
+                            </div>
+                            <button id="saveApiSettingsBtn" class="btn primary">Salvar Configurações</button>
+                        </div>
+                        <div class="settings-group">
+                            <h3>Configurações Avançadas</h3>
+                            <div class="range-control">
+                                <label>Temperatura:</label>
+                                <input type="range" id="aiTempSlider" min="0" max="1" step="0.1" value="0.7">
+                                <span id="aiTempValue">0.7</span>
+                            </div>
+                            <div class="range-control">
+                                <label>Tamanho máximo de resposta:</label>
+                                <input type="range" id="aiMaxTokensSlider" min="100" max="4000" step="100" value="1000">
+                                <span id="aiMaxTokensValue">1000 tokens</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-tab-content" id="shortcuts-tab">
+                        <div class="shortcuts-list">
+                            <div class="shortcut-item">
+                                <span class="shortcut-action">Play/Pause</span>
+                                <span class="shortcut-key">Espaço</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-action">Próxima palavra</span>
+                                <span class="shortcut-key">→</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-action">Palavra anterior</span>
+                                <span class="shortcut-key">←</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-action">Reiniciar</span>
+                                <span class="shortcut-key">ESC</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-action">Aumentar velocidade</span>
+                                <span class="shortcut-key">↑</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-action">Diminuir velocidade</span>
+                                <span class="shortcut-key">↓</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-action">Mostrar atalhos</span>
+                                <span class="shortcut-key">Segurar TAB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="resetSettingsBtn" class="btn secondary">Restaurar Padrões</button>
+                    <button id="saveSettingsBtn" class="btn primary">Salvar Alterações</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="statsModal">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h2>Estatísticas</h2>
+                    <button class="modal-close-btn">
+                        <span class="iconify" data-icon="carbon:close"></span>
+                    </button>
+                </div>
+                <div class="modal-content">
+                    <div class="stats-tabs">
+                        <button class="stats-tab-btn active" data-tab="current">Sessão Atual</button>
+                        <button class="stats-tab-btn" data-tab="history">Histórico</button>
+                    </div>
+
+                    <div class="stats-tab-content active" id="current-stats-tab">
+                        <div class="stats-summary">
+                            <div class="stat-card">
+                                <span class="stat-icon">
+                                    <span class="iconify" data-icon="carbon:document"></span>
+                                </span>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="currentWordCount">0</span>
+                                    <span class="stat-label">Palavras Lidas</span>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-icon">
+                                    <span class="iconify" data-icon="carbon:time"></span>
+                                </span>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="currentReadingTime">00:00</span>
+                                    <span class="stat-label">Tempo de Leitura</span>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-icon">
+                                    <span class="iconify" data-icon="carbon:speed"></span>
+                                </span>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="currentWPM">0</span>
+                                    <span class="stat-label">Velocidade Média (PPM)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stats-chart-container">
+                            <canvas id="sessionChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="stats-tab-content" id="history-stats-tab">
+                        <div class="stats-summary">
+                            <div class="stat-card">
+                                <span class="stat-icon">
+                                    <span class="iconify" data-icon="carbon:document-multiple"></span>
+                                </span>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="totalWordCount">0</span>
+                                    <span class="stat-label">Total de Palavras</span>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-icon">
+                                    <span class="iconify" data-icon="carbon:hourglass"></span>
+                                </span>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="totalReadingTime">00:00</span>
+                                    <span class="stat-label">Tempo Total</span>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-icon">
+                                    <span class="iconify" data-icon="carbon:calendar"></span>
+                                </span>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="totalSessions">0</span>
+                                    <span class="stat-label">Sessões</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stats-chart-container">
+                            <canvas id="historyChart"></canvas>
+                        </div>
+                        <div class="session-history">
+                            <h3>Histórico de Sessões</h3>
+                            <div class="session-history-list" id="sessionHistoryList">
+                                <!-- Session history will be generated via JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="iaModal">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h2>Geração de Texto com IA</h2>
+                    <button class="modal-close-btn">
+                        <span class="iconify" data-icon="carbon:close"></span>
+                    </button>
+                </div>
+                <div class="modal-content">
+                    <div class="ai-mode-selector">
+                        <button class="ai-mode-btn active" data-mode="free">Modo Livre</button>
+                        <button class="ai-mode-btn" data-mode="essay">Redação</button>
+                        <button class="ai-mode-btn" data-mode="qa">Perguntas e Respostas</button>
+                    </div>
+
+                    <div class="ai-mode-content active" id="free-mode">
+                        <div class="form-group">
+                            <label for="freePromptInput">Digite seu prompt:</label>
+                            <textarea id="freePromptInput" placeholder="Digite o que você quiser que a IA escreva..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="ai-mode-content" id="essay-mode">
+                        <div class="form-group">
+                            <label for="essayTopicInput">Tema da redação:</label>
+                            <input type="text" id="essayTopicInput" placeholder="Digite o tema da redação...">
+                        </div>
+                        <div class="form-group">
+                            <label for="essayToneSelect">Tom:</label>
+                            <select id="essayToneSelect">
+                                <option value="formal">Formal</option>
+                                <option value="informal">Informal</option>
+                                <option value="academic">Acadêmico</option>
+                                <option value="creative">Criativo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="essayLinesRange">Quantidade de linhas:</label>
+                            <div class="range-control">
+                                <input type="range" id="essayLinesRange" min="5" max="30" step="1" value="15">
+                                <span id="essayLinesValue">15 linhas</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="essayStyleSelect">Estilo:</label>
+                            <select id="essayStyleSelect">
+                                <option value="human">Humano</option>
+                                <option value="technical">Técnico</option>
+                                <option value="narrative">Narrativo</option>
+                                <option value="persuasive">Persuasivo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="ai-mode-content" id="qa-mode">
+                        <div class="form-group">
+                            <label for="qaQuestionInput">Sua pergunta:</label>
+                            <textarea id="qaQuestionInput" placeholder="Digite sua pergunta..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Formato de resposta:</label>
+                            <div class="radio-group">
+                                <label>
+                                    <input type="radio" name="qaFormat" value="numbered" checked>
+                                    Resposta numerada
+                                </label>
+                                <label>
+                                    <input type="radio" name="qaFormat" value="direct">
+                                    Resposta direta
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ai-generate-actions">
+                        <div class="ai-status" id="aiStatus">
+                            <span class="iconify" data-icon="carbon:status"></span>
+                            <span id="aiStatusText">Pronto para gerar texto</span>
+                        </div>
+                        <button id="generateAiTextBtn" class="btn primary">
+                            <span class="iconify" data-icon="carbon:ai-status"></span>
+                            Gerar Texto
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
