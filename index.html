@@ -54,20 +54,20 @@
                     </div>
                     <div class="reader-controls">
                         <div class="main-controls">
-                            <button id="resetBtn" class="btn-icon" title="Reiniciar (ESC)">
-                                <span class="iconify" data-icon="carbon:reset"></span>
-                            </button>
                             <button id="prevBtn" class="btn-icon" title="Palavra Anterior (←)">
                                 <span class="iconify" data-icon="carbon:arrow-left"></span>
                             </button>
-                            <button id="playPauseBtn" class="btn-icon" title="Reproduzir/Pausar (Espaço)">
+                            <button id="resetBtn" class="btn-icon" title="Reiniciar (ESC)">
+                                <span class="iconify" data-icon="carbon:reset"></span>
+                            </button>
+                            <button id="playPauseBtn" class="btn-icon" title="Reproduzir/Pausar (Espaço)"style="display: none;">
                                 <span class="iconify" data-icon="carbon:play"></span>
                             </button>
                             <button id="nextBtn" class="btn-icon" title="Próxima Palavra (→)">
                                 <span class="iconify" data-icon="carbon:arrow-right"></span>
                             </button>
                         </div>
-                        <div class="speed-control">
+                        <div class="speed-control"style="display: none;">
                             <label>Velocidade: <span id="wpmValue">300</span> PPM</label>
                             <input type="range" id="wpmSlider" min="50" max="800" step="10" value="300">
                         </div>
@@ -79,12 +79,12 @@
             <section class="audio-section">
                 <div class="audio-container">
                     <div class="audio-tabs">
-                        <button class="tab-btn active" data-tab="tts">Texto para Voz</button>
-                        <button class="tab-btn" data-tab="lofi">LoFi Music</button>
+                        <button class="tab-btn" style="display: none;"  data-tab="tts">Texto para Voz</button>
+                        <button class="tab-btn active" data-tab="lofi">LoFi Music</button>
                         <button class="tab-btn" data-tab="ambient">Sons Ambiente</button>
                     </div>
 
-                    <div class="tab-content active" id="tts-tab">
+                    <div class="tab-content" id="tts-tab" style="display: none;">
                         <!-- TTS Content -->
                         <div class="tts-controls">
                             <div class="control-group">
@@ -115,7 +115,7 @@
                         </div>
                     </div>
 
-                    <div class="tab-content" id="lofi-tab">
+                    <div class="tab-content active" id="lofi-tab">
                         <!-- LoFi Player Content -->
                         <div class="lofi-controls">
                             <div class="control-group">
@@ -125,13 +125,13 @@
                                 <button id="lofiPauseBtn" class="btn secondary">
                                     <span class="iconify" data-icon="carbon:pause"></span> Pausar
                                 </button>
-                                <button id="lofiStopBtn" class="btn secondary">
-                                    <span class="iconify" data-icon="carbon:stop"></span> Parar
+                                <button id="lofiStopBtn" style="display: none;" class="btn secondary">
+                                    <span class="iconify" data-icon="carbon:stop" style="display: none;"></span> Parar
                                 </button>
                             </div>
                             <div class="control-group">
                                 <label>Volume</label>
-                                <input type="range" id="lofiVolumeSlider" min="0" max="1" step="0.1" value="0.5">
+                                <input type="range" id="lofiVolumeSlider" min="0" max="1" step="0.01" value="0.5">
                                 <span id="lofiVolumeValue">50%</span>
                             </div>
                             <div class="control-group">
@@ -157,42 +157,42 @@
                                         <span class="iconify" data-icon="carbon:rain"></span>
                                         <span>Chuva</span>
                                     </button>
-                                    <input type="range" class="ambient-volume" min="0" max="1" step="0.1" value="0.5">
+                                    <input type="range" class="ambient-volume" min="0" max="1" step="0.01" value="0.5">
                                 </div>
                                 <div class="ambient-sound">
                                     <button class="ambient-btn" data-sound="fire">
                                         <span class="iconify" data-icon="mdi:fireplace"></span>
                                         <span>Lareira</span>
                                     </button>
-                                    <input type="range" class="ambient-volume" min="0" max="1" step="0.1" value="0.5">
+                                    <input type="range" class="ambient-volume" min="0" max="1" step="0.01" value="0.5">
                                 </div>
                                 <div class="ambient-sound">
                                     <button class="ambient-btn" data-sound="forest">
                                         <span class="iconify" data-icon="carbon:tree"></span>
                                         <span>Floresta</span>
                                     </button>
-                                    <input type="range" class="ambient-volume" min="0" max="1" step="0.1" value="0.5">
+                                    <input type="range" class="ambient-volume" min="0" max="1" step="0.01" value="0.5">
                                 </div>
                                 <div class="ambient-sound">
                                     <button class="ambient-btn" data-sound="cafe">
                                         <span class="iconify" data-icon="carbon:cafe"></span>
                                         <span>Café</span>
                                     </button>
-                                    <input type="range" class="ambient-volume" min="0" max="1" step="0.1" value="0.5">
+                                    <input type="range" class="ambient-volume" min="0" max="1" step="0.01" value="0.5">
                                 </div>
                                 <div class="ambient-sound">
                                     <button class="ambient-btn" data-sound="ocean">
                                         <span class="iconify" data-icon="tabler:wave-sine"></span>
                                         <span>Oceano</span>
                                     </button>
-                                    <input type="range" class="ambient-volume" min="0" max="1" step="0.1" value="0.5">
+                                    <input type="range" class="ambient-volume" min="0" max="1" step="0.01" value="0.5">
                                 </div>
                                 <div class="ambient-sound">
                                     <button class="ambient-btn" data-sound="bus">
                                         <span class="iconify" data-icon="mdi:bus"></span>
                                         <span>Onibus</span>
                                     </button>
-                                    <input type="range" class="ambient-volume" min="0" max="1" step="0.1" value="0.5">
+                                    <input type="range" class="ambient-volume" min="0" max="1" step="0.01" value="0.5">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -340,7 +340,7 @@
                         <div class="settings-group">
                             <h3>API Settings</h3>
                             <div class="form-group">
-                                <label for="apiKeyInput">Chave da API:</label>
+                                <label for="apiKeyInput">Chave da API (<a href="https://console.groq.com/keys" target="_blank">https://console.groq.com/keys</a>):</label>
                                 <input type="password" id="apiKeyInput" placeholder="Insira sua chave da API">
                             </div>
                             <div class="form-group">
@@ -370,9 +370,9 @@
 
                     <div class="settings-tab-content" id="shortcuts-tab">
                         <div class="shortcuts-list">
-                            <div class="shortcut-item">
-                                <span class="shortcut-action">Play/Pause</span>
-                                <span class="shortcut-key">Espaço</span>
+                            <div class="shortcut-item" style="display: none;">
+                                <span style="display: none;" class="shortcut-action">Play/Pause</span>
+                                <span style="display: none;" class="shortcut-key">Espaço</span>
                             </div>
                             <div class="shortcut-item">
                                 <span class="shortcut-action">Próxima palavra</span>
@@ -541,7 +541,7 @@
                             <label for="essayLinesRange">Quantidade de Estrofes:</label>
                             <div class="range-control">
                                 <input type="range" id="essayLinesRange" min="5" max="30" step="1" value="15">
-                                <span id="essayLinesValue">15 linhas</span>
+                                <span id="essayLinesValue">15 Estrofes</span>
                             </div>
                         </div>
                         <div class="form-group">

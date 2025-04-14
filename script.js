@@ -888,7 +888,7 @@ document.addEventListener('DOMContentLoaded', function() {
             readerSection.style.display = 'block';
 
             // Iniciar leitura
-            startReading();
+
         }
     });
 
@@ -1000,7 +1000,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.getElementById('essayLinesRange').addEventListener('input', () => {
-        document.getElementById('essayLinesValue').textContent = document.getElementById('essayLinesRange').value + ' linhas';
+        document.getElementById('essayLinesValue').textContent = document.getElementById('essayLinesRange').value + ' Estrofes';
     });
 
     // ====== Funcionalidades de Áudio (LoFi e Sons Ambiente) ======
@@ -1448,7 +1448,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Atualizar contador de linhas para redação
     essayLinesRange.addEventListener('input', () => {
-        document.getElementById('essayLinesValue').textContent = essayLinesRange.value + ' linhas';
+        document.getElementById('essayLinesValue').textContent = essayLinesRange.value + ' Estrofes';
     });
 
     // Salvar chave de API
@@ -1660,7 +1660,7 @@ document.addEventListener('DOMContentLoaded', function() {
         switch (e.key) {
             case ' ':  // Espaço
                 e.preventDefault();
-                togglePlayPause();
+                nextWord();
                 break;
             case 'ArrowRight':  // Seta direita
                 e.preventDefault();
@@ -1740,10 +1740,7 @@ document.addEventListener('DOMContentLoaded', function() {
             shortcutsContainer.innerHTML = `
                 <h2>Atalhos de Teclado</h2>
                 <div class="shortcuts-list">
-                    <div class="shortcut-item">
-                        <span class="shortcut-action">Play/Pause</span>
-                        <span class="shortcut-key">Espaço</span>
-                    </div>
+
                     <div class="shortcut-item">
                         <span class="shortcut-action">Próxima palavra</span>
                         <span class="shortcut-key">→</span>
